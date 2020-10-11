@@ -1,6 +1,6 @@
 variable "region" {
   type = string
-  default = "eu-west-1"
+  default = "us-west-1"
 }
 
 variable "vpc_id" {
@@ -16,6 +16,7 @@ variable "eks_cluster-name" {
 variable "keypair-name" {
   type = string
   description = "ssh Keypair name"
+  default = "~/.ssh/eks-sshkey"
 }
 
 variable "private_subnets_ids" {
