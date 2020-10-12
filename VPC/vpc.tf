@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "INSERT REGION" //example eu-west-1
+  region = "${var.region}" //example eu-west-1
   version = "~> 2.47"
 }
 resource "aws_eip" "nat" {
@@ -9,15 +9,15 @@ resource "aws_eip" "nat" {
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  name = "INSERT VPC NAME" //example production-vpc
-  cidr = "VPC CIDR BLOCK" //example 10.120.0.0/16
+  name = "${var.vpc_id}" //example production-vpc
+  cidr = "10.104.0.0/16" //example 10.120.0.0/16
 
-  azs = "AVAILABILTY ZONES LIST" //example ["eu-west-1b", "eu-west-1a", "eu-west-1c"]
-  private_subnets = "PRIVATE SUBNETS LIST" //example ["10.120.10.0/24","10.120.11.0/24","10.120.12.0/24"]
+  azs = ["us-west-2a","us-west-2b","us-west-2c"] //example ["eu-west-1b", "eu-west-1a", "eu-west-1c"]
+  private_subnets = ["10.104.10.0/24","10.104.11.0/24","10.104.12.0/24"]
   private_subnet_tags = {
     "kubernetes.io/role/internal-elb" : "1"
   }
-  public_subnets = "PUBLIC SUBNETS LIST" // example ["10.120.0.0/24","10.120.1.0/24","10.120.2.0/24"]
+  public_subnets = ["10.104.0.0/24","10.104.1.0/24","10.104.2.0/24"] // example ["10.120.0.0/24","10.120.1.0/24","10.120.2.0/24"]
   public_subnet_tags = {
     "kubernetes.io/role/elb" : "1"
   }
