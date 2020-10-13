@@ -17,7 +17,7 @@ locals {
 
 resource "aws_launch_configuration" "bastion-host" {
     name_prefix = "production-bastion"
-    image_id = "ami-028188d9b49b32a80"
+    image_id = "ami-0528a5175983e7f28"
     instance_type = "t2.micro"
     security_groups = ["${aws_security_group.eks-bastion.id}"]
     associate_public_ip_address = "true"
